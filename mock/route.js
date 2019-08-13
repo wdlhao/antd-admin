@@ -148,6 +148,7 @@ const database = [
   },
 ]
 
+// 理解，接口请求方式?
 module.exports = {
   [`GET ${ApiPrefix}/routes`](req, res) {
     res.status(200).json(database)

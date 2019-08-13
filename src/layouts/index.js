@@ -77,3 +77,11 @@ class Layout extends Component {
 }
 
 export default Layout
+
+
+
+/**
+  三种不同形式的布局；
+  BaseLayout、PrimaryLayout、PublicLayout
+
+ */
