@@ -166,3 +166,50 @@ PrimaryLayout.propTypes = {
 }
 
 export default PrimaryLayout
+
+/**
+项目布局，入口文件：
+1.PropTypes，应用于PrimaryLayout，进行类型限制；
+  地址：https://www.npmjs.com/package/proptypes
+  PrimaryLayout.propTypes = {
+    children: PropTypes.element.isRequired,
+    location: PropTypes.object,
+    dispatch: PropTypes.func,
+    app: PropTypes.object,
+    loading: PropTypes.object,
+  }
+  理解：对传入组件的相关属性，值或者类型，做相应的验证和限制;
+
+
+2.import withRouter from 'umi/withRouter'
+  理解：为react-router功能的重新封装；
+
+3.import { connect } from 'dva'
+
+4.import { BackTop, Layout, Drawer } from 'antd'
+  BackTop：返回页面顶部的操作按钮。
+  Layout：协助进行页面级整体布局。
+  Drawer：屏幕边缘滑出的浮层面板。针对手机端布局；
+
+5.import { GlobalFooter } from 'ant-design-pro'
+  分析：ant-design-pro里面封装了哪些可用的组件？
+
+
+6.import { enquireScreen, unenquireScreen } from 'enquire-js'
+  地址：https://github.com/WickyNilliams/enquire.js
+  介绍：用于以编程方式响应媒体查询。
+
+
+7.import { config, pathMatchRegexp, langFromPath } from 'utils'
+  介绍：utils中封装的方法；
+  config：
+  pathMatchRegexp：
+  langFromPath：
+
+8.dva
+ 
+
+
+
+
+ */

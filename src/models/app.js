@@ -1,15 +1,50 @@
-/* global window */
-
+/* global window  数据模型目录 */
 import { router } from 'utils'
 import { stringify } from 'qs'
-import store from 'store'
 import { ROLE_TYPE } from 'utils/constant'
-import { queryLayout, pathMatchRegexp } from 'utils'
 import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
+import { queryLayout, pathMatchRegexp } from 'utils'
+// 如何理解store?
+import store from 'store'
+// services/api.js中定义的方法集合对象;
+// 路径别名，是在哪里设置的？:.umirc.js
 import api from 'api'
 import config from 'config'
 
 const { queryRouteList, logoutUser, queryUserInfo } = api
+console.log(store)
+/**
+  remove: ƒ (key)
+  clearAll: ƒ ()
+  set: ƒ (key, value)
+  get: ƒ (key, optionalDefaultValue)
+  addPlugin: ƒ (plugin)
+  createStore: ƒ ()
+  each: ƒ (callback)
+  enabled: true
+  hasNamespace: ƒ (namespace)
+  namespace: ƒ (namespace)
+  plugins: [ƒ]
+  raw: {get: ƒ, set: ƒ, remove: ƒ, each: ƒ, clearAll: ƒ, …}
+  storage: {name: "localStorage", read: ƒ, write: ƒ, each: ƒ, remove: ƒ, …}
+  version: "2.0.12"
+ */
+console.log(api)
+/**
+  createUser: ƒ (data)
+  loginUser: ƒ (data)
+  logoutUser: ƒ (data)
+  queryDashboard: ƒ (data)
+  queryPostList: ƒ (data)
+  queryRouteList: ƒ (data)
+  queryUser: ƒ (data)
+  queryUserInfo: ƒ (data)
+  queryUserList: ƒ (data)
+  queryWeather: ƒ (params)
+  removeUser: ƒ (data)
+  removeUserList: ƒ (data)
+  updateUser: ƒ (data)
+ */
 
 export default {
   namespace: 'app',
@@ -74,6 +109,7 @@ export default {
       if (isInit) return
       const { locationPathname } = yield select(_ => _.app)
       const { success, user } = yield call(queryUserInfo, payload)
+      // 进行了相应的用户role权限判断；
       if (success && user) {
         const { list } = yield call(queryRouteList)
         const { permissions } = user
@@ -99,6 +135,7 @@ export default {
         store.set('permissions', permissions)
         store.set('user', user)
         store.set('isInit', true)
+        // 路由数据的重新导航
         if (pathMatchRegexp(['/', '/login'], window.location.pathname)) {
           router.push({
             pathname: '/dashboard',
@@ -150,3 +187,33 @@ export default {
     },
   },
 }
+
+/**
+ app.js，项目全局数据配置(在布局组件PrimaryLayout中有引用到)
+ 1.如何理解如下app.js封装方式?
+  export default {
+    namespace:'app',
+    state:{},
+    subscriptions:{},
+    effects:{},
+    reducers:{}
+  }
+  分析：dva,models默认数据结构;
+
+  2. import { stringify } from 'qs' (已整理)
+  3.如何理解import { store } from "store" ?
+    理解：store为localStorage的替代解决方案；
+    store.get('isInit')
+    store.set('user', {})
+    // Example store.js usage with npm
+    var store = require('store')
+    store.set('user', { name:'Marcus' })
+    store.get('user').name == 'Marcus'
+
+
+
+
+
+
+
+ */

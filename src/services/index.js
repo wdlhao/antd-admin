@@ -1,20 +1,26 @@
-import request from 'utils/request'       // 统一的axios请求方法
-import { apiPrefix } from 'utils/config'  // '/api/v1'
+/**
+  数据接口目录
 
-import api from './api'  // API配置路径对象
+
+ */
+import request from 'utils/request' // 统一的axios请求方法
+import { apiPrefix } from 'utils/config' // '/api/v1'
+
+import api from './api' // API配置路径对象
 
 const gen = params => {
   let url = apiPrefix + params
   let method = 'GET'
-  
+
   /**
     如：params:'POST /user',
      method = 'POST',
      url = '/api/v1/user'
 
    */
-  const paramsArray = params.split(' ')   // []
-  if (paramsArray.length === 2) { //其他请求方法
+  const paramsArray = params.split(' ') // []
+  if (paramsArray.length === 2) {
+    //其他请求方法
     method = paramsArray[0]
     url = apiPrefix + paramsArray[1]
   }
@@ -44,5 +50,5 @@ APIFunction.queryWeather = params => {
   })
 }
 
-console.log(APIFunction);
+console.log(APIFunction)
 export default APIFunction
