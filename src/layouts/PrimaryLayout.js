@@ -46,7 +46,15 @@ class PrimaryLayout extends PureComponent {
   }
 
   render() {
-    const { app, location, dispatch, children } = this.props
+    const { app, loading, location, dispatch, children } = this.props
+    console.log(app) // 对应app models
+    console.log(loading)
+    /**
+      项目全局数据：
+      effects: {app/query: false, dashboard/query: false, dashboard/queryWeather: false, user/query: false}
+      global: false
+      models: {app: false, dashboard: false, user: false}  
+     */
     const { theme, collapsed, notifications } = app
     const user = store.get('user') || {}
     const permissions = store.get('permissions') || {}
@@ -170,7 +178,7 @@ export default PrimaryLayout
 /**
 项目布局，入口文件：
 1.PropTypes，应用于PrimaryLayout，进行类型限制；
-  地址：https://www.npmjs.com/package/proptypes
+  地址：https://github.com/facebook/prop-types
   PrimaryLayout.propTypes = {
     children: PropTypes.element.isRequired,
     location: PropTypes.object,
@@ -183,8 +191,13 @@ export default PrimaryLayout
 
 2.import withRouter from 'umi/withRouter'
   理解：为react-router功能的重新封装；
+  @withRouter
 
 3.import { connect } from 'dva'
+  @connect(({ app, loading }) => ({ app, loading })) 
+  models中定义的state,可以直接在ui组件中使用？
+
+
 
 4.import { BackTop, Layout, Drawer } from 'antd'
   BackTop：返回页面顶部的操作按钮。
@@ -207,6 +220,7 @@ export default PrimaryLayout
   langFromPath：
 
 8.dva
+  详细文档：https://dvajs.com/
  
 
 
